@@ -37,11 +37,11 @@ const updateDisplay = () => {
     }
 
     if (isCurrentVerse) {
-      sourceDisplayText += `<span class="highlighted">${highlightedText}</span><span class="cursor">${remainingText.charAt(0)}</span><span>${remainingText.slice(1)}</span><br>`;
+      sourceDisplayText += `<span class="highlighted">${highlightedText}</span><span class="cursor">${remainingText.charAt(0)}</span><span>${remainingText.slice(1)}</span><br class="verse-end">`;
     } else if (highlightedText.length > 0) {
-      sourceDisplayText += `<span class="completed">${highlightedText}</span><span>${remainingText}</span><br>`;
+      sourceDisplayText += `<span class="completed">${highlightedText}</span><span>${remainingText}</span><br class="verse-end">`;
     } else {
-      sourceDisplayText += `<span>${verse}</span><br>`;
+      sourceDisplayText += `<span>${verse}</span><br class="verse-end">`;
     }
   });
 
@@ -49,7 +49,7 @@ const updateDisplay = () => {
     
     if (userChapter.includes(verse)) {
       userDisplayText += `<sup class="verse-number">${index+1}</sup>`;
-      userDisplayText += `<span>${verse}</span><br>`;
+      userDisplayText += `<span>${verse}</span><br class="verse-end">`;
     }
   });
 

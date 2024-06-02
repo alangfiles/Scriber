@@ -14,6 +14,10 @@ body {
   margin-top: 20px;
 }
 
+.verse-end {
+  margin-bottom: 12px;
+}
+
 .verse-number {
   font-size:x-small;
   color: #777;

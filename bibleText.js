@@ -8,5 +8,3 @@ const bibleText = [
     "For the Lord watches over the way of the righteous, but the way of the wicked leads to destruction."
   ]
 ];
-
-export default bibleText;

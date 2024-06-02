@@ -1,5 +1,6 @@
 const textDisplay = document.getElementById('text-display');
 const userInput = document.getElementById('user-input');
+const userChapterDisplay = document.getElementById('user-chapter');
 const prevChapterBtn = document.getElementById('prev-chapter');
 const nextChapterBtn = document.getElementById('next-chapter');
 const prevVerseBtn = document.getElementById('prev-verse');
@@ -10,14 +11,40 @@ let currentVerse = parseInt(localStorage.getItem('currentVerse')) || 0;
 let userInputText = localStorage.getItem('userInput') || '';
 
 const updateDisplay = () => {
-  const text = bibleText[currentChapter][currentVerse];
-  const highlightedText = text.slice(0, userInputText.length);
-  const remainingText = text.slice(userInputText.length);
-  textDisplay.innerHTML = `<span class="highlighted">${highlightedText}</span><span>${remainingText}</span>`;
-  userInput.value = userInputText;
-  localStorage.setItem('currentChapter', currentChapter);
-  localStorage.setItem('currentVerse', currentVerse);
-  localStorage.setItem('userInput', userInputText);
+  const chapter = bibleText[currentChapter];
+  let displayText = '';
+  let userChapterText = '';
+
+  chapter.forEach((verse, index) => {
+    let highlightedText = '';
+    let remainingText = verse;
+    let isCurrentVerse = index === currentVerse;
+
+    if (userInputText.length > 0 && isCurrentVerse) {
+      if (userInputText.length >= verse.length) {
+        highlightedText = verse;
+        remainingText = '';
+        userInputText = '';
+        localStorage.setItem('userInput', userInputText);
+      } else {
+        highlightedText = verse.slice(0, userInputText.length);
+        remainingText = verse.slice(userInputText.length);
+      }
+    }
+
+    if (isCurrentVerse) {
+      displayText += `<span class="highlighted">${highlightedText}</span><span class="cursor">${remainingText.charAt(0)}</span><span>${remainingText.slice(1)}</span><br>`;
+    } else if (highlightedText.length > 0) {
+      displayText += `<span class="completed">${highlightedText}</span><span>${remainingText}</span><br>`;
+    } else {
+      displayText += `<span>${verse}</span><br>`;
+    }
+
+    userChapterText += verse + '<br>';
+  });
+
+  textDisplay.innerHTML = displayText;
+  userChapterDisplay.innerHTML = userChapterText;
 };
 
 userInput.addEventListener('input', (e) => {

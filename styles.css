@@ -14,6 +14,12 @@ body {
   margin-top: 20px;
 }
 
+.verse-number {
+  font-size:x-small;
+  color: #777;
+  padding-right: 4px;
+}
+
 
 .panel {
   flex: 1;

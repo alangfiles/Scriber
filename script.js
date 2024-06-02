@@ -17,6 +17,7 @@ const updateDisplay = () => {
   let userDisplayText = '';
 
   chapter.forEach((verse, index) => {
+    sourceDisplayText += `<sup class="verse-number">${index+1}</sup>`;
     let highlightedText = '';
     let remainingText = verse;
     let isCurrentVerse = index === currentVerse;
@@ -45,7 +46,9 @@ const updateDisplay = () => {
   });
 
   chapter.forEach((verse, index) => {
+    
     if (userChapter.includes(verse)) {
+      userDisplayText += `<sup class="verse-number">${index+1}</sup>`;
       userDisplayText += `<span>${verse}</span><br>`;
     }
   });
@@ -67,8 +70,10 @@ userInput.addEventListener('keydown', (e) => {
     e.preventDefault();
     if (e.shiftKey) {
       navigateVerse(-1);
+      userInput.value = '';
     } else {
       navigateVerse(1);
+      userInput.value = '';
     }
   }
 });
@@ -93,10 +98,5 @@ const navigateChapter = (change) => {
   userInputText = '';
   updateDisplay();
 };
-
-prevChapterBtn.addEventListener('click', () => navigateChapter(-1));
-nextChapterBtn.addEventListener('click', () => navigateChapter(1));
-prevVerseBtn.addEventListener('click', () => navigateVerse(-1));
-nextVerseBtn.addEventListener('click', () => navigateVerse(1));
 
 updateDisplay();

@@ -1,3 +1,4 @@
+
 const sourceChapterDisplay = document.getElementById('text-display');
 const userChapterDisplay = document.getElementById('user-text-display');
 const userInput = document.getElementById('user-input');
